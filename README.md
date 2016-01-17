@@ -27,5 +27,20 @@ Some technical debt that was assumed during this project. This debt was taken on
 ```
 fieldChange class is duplicated in multiple components. These components could potentially extend from a master component that implements this class.
 Event data is assumed to be valid when catching events. Error checking mechanisms can be added here
-Better form validation - Start time should not exceed end time. Max duration on start time. Error messages
+Better form validation - Start time should not exceed end time. Max duration on start time. Error message
+Improve the ui on clip edit - It can be neater with a little extra formattings
+Passing in clip data - Could just pass in the clip object itself, instead of creating a new property. Fix this later
+Code standards - Setup ESLint coding standard rules to keep spacing etc. consistent
 ```
+
+### Product ideas
+
+Some product ideas worth exploring for the future:
+
+```
+Allow user to upload a 'poster' (aka teaser) image for the video in case it is shared elsewhere
+```
+
+### v1.0.0
+
+This branch contains the mandatory features according to the challenge specs and all dependencies compiled.
