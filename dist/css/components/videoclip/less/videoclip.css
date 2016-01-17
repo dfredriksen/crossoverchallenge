@@ -1,0 +1,45 @@
+.video-clip .thumb,
+.video-clip .content,
+.video-clip .action {
+  vertical-align: middle;
+  display: inline-block;
+}
+.video-clip .thumb .glyphicon,
+.video-clip .content .glyphicon,
+.video-clip .action .glyphicon {
+  font-size: 2.5em;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.video-clip .thumb .glyphicon.glyphicon-play,
+.video-clip .content .glyphicon.glyphicon-play,
+.video-clip .action .glyphicon.glyphicon-play {
+  color: green;
+}
+.video-clip .thumb .glyphicon.glyphicon-pencil,
+.video-clip .content .glyphicon.glyphicon-pencil,
+.video-clip .action .glyphicon.glyphicon-pencil {
+  color: #FF9900;
+}
+.video-clip .thumb .glyphicon.glyphicon-remove,
+.video-clip .content .glyphicon.glyphicon-remove,
+.video-clip .action .glyphicon.glyphicon-remove {
+  color: red;
+}
+.video-clip .thumb .video-player,
+.video-clip .content .video-player,
+.video-clip .action .video-player {
+  width: 110px;
+}
+.video-clip .thumb .video-player video,
+.video-clip .content .video-player video,
+.video-clip .action .video-player video {
+  width: 100px;
+}
+.video-clip .content {
+  width: 250px;
+}
+.video-clip .action {
+  width: 175px;
+  text-align: left;
+}
