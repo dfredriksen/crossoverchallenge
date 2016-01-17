@@ -48,3 +48,7 @@ Allow user to upload a 'poster' (aka teaser) image for the video in case it is s
 ### v1.0.0
 
 This branch contains the mandatory features according to the challenge specs and all dependencies compiled.
+
+### v1.0.1
+
+Bonus feature to continuously play through cliplist with 3 second delay and overlay
