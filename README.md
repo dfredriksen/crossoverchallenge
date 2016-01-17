@@ -19,3 +19,13 @@ node_modules/.bin/gulp no-deps
 ```
 
 And your dist folder will be built with the appropriate dependencies.
+
+### Technical Debt
+
+Some technical debt that was assumed during this project. This debt was taken on because of limited project time and tracked here to be prioritized or forgotten as necessary.
+
+```
+fieldChange class is duplicated in multiple components. These components could potentially extend from a master component that implements this class.
+Event data is assumed to be valid when catching events. Error checking mechanisms can be added here
+Better form validation - Start time should not exceed end time. Max duration on start time. Error messages
+```

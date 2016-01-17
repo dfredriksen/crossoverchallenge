@@ -5,6 +5,10 @@
 
     <link rel="stylesheet" type="text/css" href="../dist/libs/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../dist/css/base.css">
+    <link rel="stylesheet" type="text/css" href="../dist/css/components/videoplayer/less/videoplayer.css">
+    <link rel="stylesheet" type="text/css" href="../dist/css/components/videoclip/less/videoclip.css">
+    <link rel="stylesheet" type="text/css" href="../dist/css/components/videocliplist/less/videocliplist.css">
+    <link rel="stylesheet" type="text/css" href="../dist/css/components/clipcontrol/less/clipcontrol.css">
 
     <!-- external libraries -->
     <script src="../dist/libs/react/react.min.js"></script>
@@ -18,18 +22,26 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
-          <div class="react-video-player"></div>
+          <div class="video-container">
+            <div class="react-video-player" data-props='{"videoSrc":"assets/sintel_trailer-480.mp4","videoStart":0, "playEventPrefix":"mainVideo"}'></div>
+          </div>
+          <div class="control-container">
+            <div class="react-clip-control" data-props='{"videoSrc":"assets/sintel_trailer-480.mp4", "name":"clipcontrol","id":"clipcontrol"}'></div>
+          </div>
         </div>
         <div class="col-sm-6">
-          <div class="jumbotron">
-            Clips
-          </div>
+          <div class="react-video-clip" data-props='{"name":"videoclip_1","id":"videoclip_1","clipName":"Full Video","clipSrc":"assets/sintel_trailer-480.mp4", "playEventPrefix":"mainVideo","allowRemove":false,"allowEdit":false}'></div>
+          <hr />
+          <div class="react-video-clip-list" data-props='{"createEventPrefix":"clipcontrol","playEventPrefix":"mainVideo","editEventPrefix":"listEdit","removeEventPrefix":"listRemove", "allowEdit":true,"allowRemove":true}'></div>
         </div>
       </div>  
     </div>
 
     <!-- component libraries -->
+    <script src="../dist/components/clipcontrol/clipcontrol.js"></script>
     <script src="../dist/components/videoplayer/videoplayer.js"></script>
+    <script src="../dist/components/videoclip/videoclip.js"></script>
+    <script src="../dist/components/videocliplist/videocliplist.js"></script>
     <script src="../dist/js/app.js"></script>
 
   </body>
