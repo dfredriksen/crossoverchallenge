@@ -11,9 +11,11 @@ class VideoClipList extends React.Component {
     props.playEventPrefix = props.playEventPrefix || props.name;
     props.editEventPrefix = props.editEventPrefix || props.name;
     props.removeEventPrefix = props.removeEventPrefix || props.name;
+    props.videoEndEventPrefix = props.videoEndEventPrefix || props.playEventPrefix;
     props.allowEdit = props.allowEdit || true;
     props.allowRemove = props.allowRemove || true;
     props.maxDuration = props.maxDuration || 0;
+    props.clipInterval = props.clipInterval || 3000;
     super(props);
     this.state = {clips: props.clips};
   }
@@ -35,10 +37,27 @@ class VideoClipList extends React.Component {
     this.setState({clips:clips});
   }
 
-
   componentDidMount() {
     document.addEventListener(this.props.createEventPrefix + '_videoclip_create' , this.createClip.bind(this));
     document.addEventListener(this.props.removeEventPrefix + '_videoclip_remove' , this.removeClip.bind(this));
+    document.addEventListener(this.props.videoEndEventPrefix + '_video_end' , this.videoEnded.bind(this));
+
+  }
+
+  videoEnded(event) {
+    var newEvent = {}, clip = {}, index, self, timer;
+    self = this;
+    index = event.videoData.index;
+    if(index < this.state.clips.length - 1) {
+      timer = window.setInterval(function(){
+          clearInterval(timer);
+          clip = self.state.clips[index+1];
+          newEvent = new Event(self.props.playEventPrefix + '_videoclip_play');
+          newEvent.clipData = { tag: clip.clipName, start: clip.clipStart, end: clip.clipEnd, src: clip.clipSrc, autostart:true, index:index+1 }; 
+          document.dispatchEvent(newEvent);
+
+      }, this.props.clipInterval);          
+    }
   }
 
   renderClips() {

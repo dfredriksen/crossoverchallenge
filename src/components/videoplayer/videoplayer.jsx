@@ -7,25 +7,27 @@ class VideoPlayer extends React.Component {
     props.id = props.id || 'video' + Date.now();
     props.controls = typeof props.controls === 'undefined' ? true : props.controls;
     props.playEventPrefix = props.playEventPrefix || props.name;
+    props.endEventPrefix = props.endEventPrefix || props.playEventPrefix;
     props.listenToEvents = props.listenToEvents || true;
     props.videoSrc = props.videoSrc || '';
     props.videoStart = props.videoStart || 0;
     props.videoEnd = props.videoEnd || 0;
+    props.videoIndex = props.videoIndex || -1;
     super(props);  
     props.videoSrc = this.prepareVideoSource(props.videoSrc, props.videoStart, props.videoEnd);
-    this.state = {videoSrc:props.videoSrc};
+    this.state = {videoSrc:props.videoSrc, index: this.props.videoIndex};
   }
 
   playClip(event) {
-    var videoSrc, end, start, timer, timercounter, self;
+    var videoSrc, end, start, timer, timercounter, index, self;
     self = this;
     end = event.clipData.end;
     start = event.clipData.start;
+    index = event.clipData.index;
     videoSrc = event.clipData.src;
     videoSrc = this.prepareVideoSource(videoSrc, start, end);
-    this.setState({videoSrc:videoSrc});
+    this.setState({videoSrc:videoSrc, index:index});
     this.refs.video.src = videoSrc;
-    console.log('I caught the ' + this.props.playEventPrefix + ' event');
     if( event.clipData.autostart ) {
       timer = window.setInterval(function(){      
         timercounter++;
@@ -41,6 +43,13 @@ class VideoPlayer extends React.Component {
     this.refs.video.play;
   }
 
+  videoEnded() {
+    var newEvent = {};
+    newEvent = new Event(this.props.endEventPrefix + '_video_end');
+    newEvent.videoData = {videoId:this.props.id,index:this.state.index}; 
+    document.dispatchEvent(newEvent);  
+  }
+
   prepareVideoSource(source,start,end)
   {
     var videoSrc = source;
@@ -52,6 +61,7 @@ class VideoPlayer extends React.Component {
 
   componentDidMount() {
     document.addEventListener(this.props.playEventPrefix + '_videoclip_play' , this.playClip.bind(this));
+    this.refs.video.addEventListener('pause', this.videoEnded.bind(this));
   }
 
   render() {

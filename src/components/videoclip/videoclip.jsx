@@ -15,7 +15,7 @@ class VideoClip extends React.Component {
     props.removeEventPrefix = props.removeEventPrefix || props.name;
     props.allowEdit = props.allowEdit || false;
     props.allowRemove = props.allowRemove || false;
-    props.index = props.index || 0;
+    props.index = props.index || -1;
     props.initialEditMode = props.initialEditMode || false;
     props.maxDuration = props.maxDuration || 0;
     super(props);
@@ -30,7 +30,7 @@ class VideoClip extends React.Component {
   playClip() {
     var newEvent = {};
     newEvent = new Event(this.props.playEventPrefix + '_videoclip_play');
-    newEvent.clipData = { tag: this.state.clipName, start: this.state.clipStart, end: this.state.clipEnd, src: this.props.clipSrc, autostart:true }; 
+    newEvent.clipData = { tag: this.state.clipName, start: this.state.clipStart, end: this.state.clipEnd, src: this.props.clipSrc, autostart:true, index:this.props.index }; 
     document.dispatchEvent(newEvent);
   }
 
@@ -128,7 +128,7 @@ class VideoClip extends React.Component {
     return (
       <div className={this.props.class}>
         <div className="thumb">
-          <VideoPlayer videoSrc={this.props.clipSrc} playEventPrefix={this.props.name} videoStart={this.state.clipStart} videoEnd={this.state.clipEnd} controls={this.props.videoControls} name={this.props.name + '_video'} id={this.props.id + '_video'} /> 
+          <VideoPlayer videoSrc={this.props.clipSrc} playEventPrefix={this.props.name} videoStart={this.state.clipStart} videoEnd={this.state.clipEnd} controls={this.props.videoControls} name={this.props.name + '_video'} id={this.props.id + '_video'} index={this.props.index} /> 
           <input type="hidden" value={this.props.index} name={this.props.name + '_index'} id={this.props.id + '_index'} />
           <input type="hidden" value={this.state.clipStart} name={this.props.name + '_clipStart'} id={this.props.id + '_clipStart'} />
           <input type="hidden" value={this.state.clipEnd} name={this.props.name + '_clipEnd'} id={this.props.id + '_clipEnd'} />
