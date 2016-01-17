@@ -13,11 +13,22 @@ class VideoPlayer extends React.Component {
     props.videoStart = props.videoStart || 0;
     props.videoEnd = props.videoEnd || 0;
     props.videoIndex = props.videoIndex || -1;
+    props.loaderImagePath = props.loaderImagePath ||  '';
+    props.showLoader = props.showLoader || false;
     super(props);  
     props.videoSrc = this.prepareVideoSource(props.videoSrc, props.videoStart, props.videoEnd);
-    this.state = {videoSrc:props.videoSrc, index: this.props.videoIndex};
+    this.state = {videoSrc:props.videoSrc, index: this.props.videoIndex, showLoader: this.props.showLoader};
   }
 
+  showLoader() {
+    this.setState({showLoader: true});
+  }
+
+  hideLoader() {
+    this.setState({showLoader: false});
+  }
+
+  
   playClip(event) {
     var videoSrc, end, start, timer, timercounter, index, self;
     self = this;
@@ -46,7 +57,7 @@ class VideoPlayer extends React.Component {
   videoEnded() {
     var newEvent = {};
     newEvent = new Event(this.props.endEventPrefix + '_video_end');
-    newEvent.videoData = {videoId:this.props.id,index:this.state.index}; 
+    newEvent.videoData = {videoId:this.props.id,index:this.state.index, videoObject: this}; 
     document.dispatchEvent(newEvent);  
   }
 
@@ -64,10 +75,31 @@ class VideoPlayer extends React.Component {
     this.refs.video.addEventListener('pause', this.videoEnded.bind(this));
   }
 
+  renderLoaderAnimation() {
+    if( this.props.loaderImagePath ) {
+      return (
+        <div className="loader-animation">
+          <img src={this.props.loaderImagePath} />
+        </div>
+      );
+    }
+  }
+
+  renderLoader() {
+     if( this.state.showLoader ) {
+       return (
+          <div className="loader-overlay">
+            {this.renderLoaderAnimation()}
+          </div>
+       );
+     }
+  }
+
   render() {
     this.props.class = this.props.class ? this.props.class + ' video-player' : 'video-player';
     return (
       <div className={this.props.class}>
+          {this.renderLoader()}
           <video ref="video" name={this.props.name} id={this.props.id} controls={this.props.controls}>
             <source src={this.state.videoSrc} />              
           </video>

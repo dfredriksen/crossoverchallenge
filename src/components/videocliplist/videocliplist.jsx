@@ -49,9 +49,11 @@ class VideoClipList extends React.Component {
     self = this;
     index = event.videoData.index;
     if(index < this.state.clips.length - 1) {
+      event.videoData.videoObject.showLoader();
       timer = window.setInterval(function(){
           clearInterval(timer);
           clip = self.state.clips[index+1];
+          event.videoData.videoObject.hideLoader();     
           newEvent = new Event(self.props.playEventPrefix + '_videoclip_play');
           newEvent.clipData = { tag: clip.clipName, start: clip.clipStart, end: clip.clipEnd, src: clip.clipSrc, autostart:true, index:index+1 }; 
           document.dispatchEvent(newEvent);

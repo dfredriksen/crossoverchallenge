@@ -31,6 +31,9 @@ Better form validation - Start time should not exceed end time. Max duration on 
 Improve the ui on clip edit - It can be neater with a little extra formattings
 Passing in clip data - Could just pass in the clip object itself, instead of creating a new property. Fix this later
 Code standards - Setup ESLint coding standard rules to keep spacing etc. consistent
+Gulp task to handle Minification and concatenation of less/js files 
+Gulp task to handle optimization of image assets
+Fix jumpiness in certain state changes by using fixed width divs in example
 ```
 
 ### Product ideas
