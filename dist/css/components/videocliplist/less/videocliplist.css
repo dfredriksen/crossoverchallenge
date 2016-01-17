@@ -1,0 +1,8 @@
+.video-clip-list {
+  max-height: 548px;
+  overflow: scroll;
+}
+.video-clip-list ul {
+  list-style-type: none;
+  padding-left: 0px;
+}
