@@ -57,3 +57,7 @@ Bonus feature to continuously play through cliplist with 3 second delay and over
 ### v1.0.2
 
 Bonus feature ability to persist clip data throughout session
+
+### v1.0.3
+
+Bonus feature ability to filter by tag names
