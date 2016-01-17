@@ -52,3 +52,7 @@ This branch contains the mandatory features according to the challenge specs and
 ### v1.0.1
 
 Bonus feature to continuously play through cliplist with 3 second delay and overlay
+
+### v1.0.2
+
+Bonus feature ability to persist clip data throughout session
