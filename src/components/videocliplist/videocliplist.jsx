@@ -17,8 +17,9 @@ class VideoClipList extends React.Component {
     props.maxDuration = props.maxDuration || 0;
     props.clipInterval = props.clipInterval || 3000;
     props.message = props.message || false;
+    props.filter = props.filter || '';
     super(props);
-    this.state = {clips: props.clips, message: props.message};
+    this.state = {clips: props.clips, message: props.message, filter: this.props.filter};
   }
 
   createClip(event) {
@@ -29,7 +30,7 @@ class VideoClipList extends React.Component {
     newClip.clipName = event.clipData.tag;
     newClip.class = 'video-clip';
     clips.push(newClip);
-    this.setState({clips:clips});
+    this.setState({clips:clips, filter:''});
   }
 
   removeClip(event) {
@@ -63,6 +64,14 @@ class VideoClipList extends React.Component {
     }
   }
 
+  fieldChange(key) {
+    return function (e) {
+      var state = {};
+      state[key] = e.target.value;
+      this.setState(state);
+    }.bind(this);
+  }
+
   saveList() {
     var message = {}, clipData;
    
@@ -94,25 +103,44 @@ class VideoClipList extends React.Component {
   }
 
    renderClips() {
-    var index = 0, clips = [];
+    var index = 0, clips = [], clipData;
+    console.log(this.state.clips);
     for(index = 0; index < this.state.clips.length; index++) {
-      this.state.clips[index].name = this.props.name + '_clip' + index;
-      this.state.clips[index].id = this.props.id + '_clip' + index;
+      clipData = {};
+      clipData.name = this.props.name + '_clip' + index;
+      clipData.id = this.props.id + '_clip' + index;
+      clipData.class = this.state.clips[index].class;
+      clipData.clipEnd = this.state.clips[index].clipEnd;
+      clipData.clipName = this.state.clips[index].clipName;
+      clipData.clipSrc = this.state.clips[index].clipSrc;
+      clipData.clipStart = this.state.clips[index].clipStart;      
+      if(this.state.filter != '' && clipData.clipName.indexOf(this.state.filter) < 0) {
+        clipData.class = this.state.clips[index].class + ' hide';
+      }
+
        clips.push(
          <li>
-          <VideoClip {...this.state.clips[index]} playEventPrefix={this.props.playEventPrefix} editEventPrefix={this.props.editEventPrefix} removeEventPrefix={this.props.removeEventPrefix} allowEdit={this.props.allowEdit} allowRemove={this.props.allowRemove} index={index} maxDuration={this.props.maxDuration} />
-           <hr /> 
+          <VideoClip {...clipData} playEventPrefix={this.props.playEventPrefix} editEventPrefix={this.props.editEventPrefix} removeEventPrefix={this.props.removeEventPrefix} allowEdit={this.props.allowEdit} allowRemove={this.props.allowRemove} index={index} maxDuration={this.props.maxDuration} />
+           <hr className={clipData.class} /> 
          </li>
-       );
-     }
-
+       );    
+    }
+    console.log(clips);
     return clips;
    }
 
   render() {
     return (
       <div className={this.props.class}>
-        <ul>
+        <div className="video-clip-list-filter">
+          <div className="label-container">
+            <label>Filter by:</label>
+          </div>
+          <div className="field-container">
+            <input type="text" name={this.props.name + '_filter'} id={this.props.id + '_filter'} value={this.state.filter} onChange={this.fieldChange('filter')} className="form-control" />
+          </div>
+        </div>
+        <ul className="margin-5-top">
           {this.renderClips()}
         </ul>
         <div className="video-clip-list-controls">
