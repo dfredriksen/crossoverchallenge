@@ -52,7 +52,9 @@ $(document).ready(function() {
         }
 
         if($videocliplist.length > 0 && VideoClipList) {
-          props = $videocliplist.data('props');    
+          var savedClips = window.localStorage.getItem('clips') || [];
+          props = $videocliplist.data('props');   
+          props.clips = JSON.parse(savedClips);
           props.maxDuration = duration;
           ReactDOM.render(
             <VideoClipList {...props} />,

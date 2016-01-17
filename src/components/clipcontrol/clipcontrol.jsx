@@ -11,8 +11,9 @@ class ClipControl extends React.Component {
     this.state = { tagValue: '', startValue: 0, endValue: 0 };
   }
 
-  createClip() {
+  createClip(event) {
       var newEvent = {};
+      event.preventDefault();
       newEvent = new Event(this.props.name + '_videoclip_create');
       newEvent.clipData = { tag: this.state.tagValue, start: this.state.startValue, end: this.state.endValue, src: this.props.videoSrc }; 
       document.dispatchEvent(newEvent);
@@ -50,7 +51,7 @@ class ClipControl extends React.Component {
             <input type="number" name={this.props.name + '_end'} id={this.props.id + '_end'} max={this.props.maxDuration} value={this.state.endValue} onChange={this.fieldChange('endValue')} className="form-control" />            
           </div>
           <div className="form-group margin-5-top">
-            <a className="btn btn-primary" onClick={this.createClip.bind(this)}>Create Clip</a>
+            <button className="btn btn-primary" onClick={this.createClip.bind(this)}>Create Clip</button>
           </div>
         </form>
       </div>

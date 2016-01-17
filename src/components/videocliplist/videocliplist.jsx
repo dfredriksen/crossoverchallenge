@@ -16,8 +16,9 @@ class VideoClipList extends React.Component {
     props.allowRemove = props.allowRemove || true;
     props.maxDuration = props.maxDuration || 0;
     props.clipInterval = props.clipInterval || 3000;
+    props.message = props.message || false;
     super(props);
-    this.state = {clips: props.clips};
+    this.state = {clips: props.clips, message: props.message};
   }
 
   createClip(event) {
@@ -62,21 +63,51 @@ class VideoClipList extends React.Component {
     }
   }
 
-  renderClips() {
+  saveList() {
+    var message = {}, clipData;
+   
+    if(confirm('This will save the current cliplist to your session and erase any previous data you may have saved. Are you sure you want to continue?')) {
+      clipData = JSON.stringify(this.state.clips);
+      window.localStorage.setItem('clips', clipData);
+      message.text = 'Clip list has been saved successfully';
+      message.type = 'alert-success';
+      this.setState({message:message});
+    }
+  }
+
+  renderMessage() {
+    var text, type, timer, self;
+    self = this;
+    if(this.state.message) { 
+      text = this.state.message.text;
+      type = 'margin-5-top alert ' + this.state.message.type;
+      timer = window.setInterval(function(){
+          clearInterval(timer);
+          self.setState({message:false});
+      }, 5000);
+      return (
+        <div className={type}>
+          {text}
+        </div>
+      );
+    }
+  }
+
+   renderClips() {
     var index = 0, clips = [];
     for(index = 0; index < this.state.clips.length; index++) {
       this.state.clips[index].name = this.props.name + '_clip' + index;
       this.state.clips[index].id = this.props.id + '_clip' + index;
-      clips.push(
-        <li>
+       clips.push(
+         <li>
           <VideoClip {...this.state.clips[index]} playEventPrefix={this.props.playEventPrefix} editEventPrefix={this.props.editEventPrefix} removeEventPrefix={this.props.removeEventPrefix} allowEdit={this.props.allowEdit} allowRemove={this.props.allowRemove} index={index} maxDuration={this.props.maxDuration} />
-          <hr /> 
-        </li>
-      );
-    }
+           <hr /> 
+         </li>
+       );
+     }
 
     return clips;
-  }
+   }
 
   render() {
     return (
@@ -84,6 +115,10 @@ class VideoClipList extends React.Component {
         <ul>
           {this.renderClips()}
         </ul>
+        <div className="video-clip-list-controls">
+          <button className="btn btn-primary" onClick={this.saveList.bind(this)}>Save</button>
+        </div>
+        {this.renderMessage()}
       </div>
     );
   }

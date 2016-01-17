@@ -34,6 +34,7 @@ Code standards - Setup ESLint coding standard rules to keep spacing etc. consist
 Gulp task to handle Minification and concatenation of less/js files 
 Gulp task to handle optimization of image assets
 Fix jumpiness in certain state changes by using fixed width divs in example
+Message functionality is pretty standard, could probably go into a master class to be inherited
 ```
 
 ### Product ideas
