@@ -63,3 +63,8 @@ Bonus feature ability to persist clip data throughout session
 ### v1.0.3
 
 Bonus feature ability to filter by tag names
+
+### v1.0.4
+
+Bonus feature ability to move to previous and next clip with the F7 and F9 keys respectively
+Fixed a bug with the clip indexes and added highlight to selected clip
