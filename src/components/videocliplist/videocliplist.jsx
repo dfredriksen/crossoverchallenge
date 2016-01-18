@@ -12,12 +12,13 @@ class VideoClipList extends React.Component {
     props.editEventPrefix = props.editEventPrefix || props.name;
     props.removeEventPrefix = props.removeEventPrefix || props.name;
     props.videoEndEventPrefix = props.videoEndEventPrefix || props.playEventPrefix;
-    props.allowEdit = props.allowEdit || true;
-    props.allowRemove = props.allowRemove || true;
+    props.allowEdit = typeof props.allowEdit !== 'undefined' ? props.allowEdit : true;
+    props.allowRemove = typeof props.allowRemove !== 'undefined' ? props.allowRemove : true;
     props.maxDuration = props.maxDuration || 0;
     props.clipInterval = props.clipInterval || 3000;
     props.message = props.message || false;
     props.filter = props.filter || '';
+    props.allowSave = props.allowSave || false;
     super(props);
     this.state = {clips: props.clips, message: props.message, filter: this.props.filter};
   }
@@ -178,6 +179,16 @@ class VideoClipList extends React.Component {
     return clips;
    }
 
+  renderControls() {
+    if(this.props.allowSave) {
+      return (
+        <div className="video-clip-list-controls">
+          <button className="btn btn-primary" onClick={this.saveList.bind(this)}>Save</button>
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div className={this.props.class}>
@@ -192,9 +203,7 @@ class VideoClipList extends React.Component {
         <ul className="margin-5-top">
           {this.renderClips()}
         </ul>
-        <div className="video-clip-list-controls">
-          <button className="btn btn-primary" onClick={this.saveList.bind(this)}>Save</button>
-        </div>
+        {this.renderControls()}
         {this.renderMessage()}
       </div>
     );

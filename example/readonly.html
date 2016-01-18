@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Example Code Challenge- Media Fragments</title>   
+    <title>Example Code Challenge- Media Fragments Read Only</title>   
 
     <link rel="stylesheet" type="text/css" href="../dist/libs/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../dist/css/base.css">
@@ -23,20 +23,17 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
-          <div class="video-container">
-            <div class="react-video-player" data-props='{"videoSrc":"assets/sintel_trailer-480.mp4","videoStart":0, "playEventPrefix":"mainVideo", "loaderImagePath":"../dist/images/videoplayer/img/gear.svg","controls":true}'></div>
-          </div>
-          <div class="control-container">
-            <div class="react-clip-control" data-props='{"videoSrc":"assets/sintel_trailer-480.mp4", "name":"clipcontrol","id":"clipcontrol"}'></div>
-          </div>
-        </div>
-        <div class="col-sm-6">
           <div class="react-video-clip" data-props='{"name":"videoclip_1","id":"videoclip_1","clipName":"Full Video","clipSrc":"assets/sintel_trailer-480.mp4", "playEventPrefix":"mainVideo","allowRemove":false,"allowEdit":false}'></div>
           <div class="react-video-timeline margin-5-top" data-props='{"name":"videotimeline","id":"videotimeline","updateEventPrefix":"mainVideo","addMarkerEventPrefix":"clipcontrol"}'></div>
           <hr />
-          <div class="react-video-clip-list" data-props='{"createEventPrefix":"clipcontrol","playEventPrefix":"mainVideo","editEventPrefix":"listEdit","removeEventPrefix":"listRemove", "allowEdit":true,"allowRemove":true, "allowSave":true}'></div>
+          <div class="react-video-clip-list" data-props='{"createEventPrefix":"clipcontrol","playEventPrefix":"mainVideo","editEventPrefix":"listEdit","removeEventPrefix":"listRemove", "allowEdit":false,"allowRemove":false, "allowSave":false}'></div>
         </div>
-      </div>  
+        <div class="col-sm-6">
+          <div class="video-container">
+            <div class="react-video-player" data-props='{"videoSrc":"assets/sintel_trailer-480.mp4","videoStart":0, "playEventPrefix":"mainVideo", "loaderImagePath":"../dist/images/videoplayer/img/gear.svg","controls":true}'></div>
+          </div>
+        </div>
+      </div> 
     </div>
 
     <!-- component libraries -->
