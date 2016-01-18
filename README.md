@@ -1,4 +1,4 @@
-# Code Challenge for Crossover Intelligence
+# Code Challenge for Krossover Intelligence
 
 ## Overview
 This project is my answer for the code challenge posed by Crossover intelligence. It fulfills all of the specs for the mandatory features and the bonus features, and is very modular. The UI/UX is simple and straightforward, and also is mildly responsive. To see the examples in action, simply view the files in the examples directory. There is a sample that allows editing and a readonly page that demonstrates a different arrangement of the components of the page. 
