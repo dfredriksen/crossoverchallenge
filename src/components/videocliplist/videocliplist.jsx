@@ -51,9 +51,41 @@ class VideoClipList extends React.Component {
       clips[index].selected = true;
     }
 
-    console.log(clips);
-
     this.setState({clips:clips});
+  }
+
+  selectVideo(next) {
+    var selectedIndex = -1, index, clips, selectedClip;
+    clips = this.state.clips;
+    for(index = 0; index < clips.length; index++) {
+      selectedIndex = clips[index].selected ? index : selectedIndex;
+      if(selectedIndex > -1) {
+        break;
+      }
+    }
+
+    if(next && selectedIndex < clips.length-1) {
+      selectedIndex += 1;
+    } else if(!next && selectedIndex > 0) {
+      selectedIndex -= 1;
+    }
+    console.log(selectedIndex);
+    selectedClip = clips[selectedIndex];
+    var newEvent = {};
+    newEvent = new Event(this.props.playEventPrefix + '_videoclip_play');
+    newEvent.clipData = { tag: selectedClip.clipName, start: selectedClip.clipStart, end: selectedClip.clipEnd, src: selectedClip.clipSrc, autostart:true, index:selectedIndex }; 
+    document.dispatchEvent(newEvent);
+
+  }
+
+  keyEvent(event) {
+    var code = event.keyCode;
+    //n or N key is pressed for next
+    if( code == 78 ) {
+       this.selectVideo(true);
+    } else if(code == 80) {
+       this.selectVideo(false);     
+    }
   }
 
   componentDidMount() {
@@ -61,6 +93,7 @@ class VideoClipList extends React.Component {
     document.addEventListener(this.props.removeEventPrefix + '_videoclip_remove' , this.removeClip.bind(this));
     document.addEventListener(this.props.playEventPrefix + '_videoclip_play' , this.videoSelected.bind(this));
     document.addEventListener(this.props.videoEndEventPrefix + '_video_end' , this.videoEnded.bind(this));
+    document.addEventListener('keyup' , this.keyEvent.bind(this));
   }
 
   videoEnded(event) {
