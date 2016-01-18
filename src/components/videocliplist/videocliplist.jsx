@@ -69,7 +69,6 @@ class VideoClipList extends React.Component {
     } else if(!next && selectedIndex > 0) {
       selectedIndex -= 1;
     }
-    console.log(selectedIndex);
     selectedClip = clips[selectedIndex];
     var newEvent = {};
     newEvent = new Event(this.props.playEventPrefix + '_videoclip_play');
@@ -80,7 +79,6 @@ class VideoClipList extends React.Component {
 
   keyEvent(event) {
     var code = event.keyCode;
-    console.log(code);
     //F7 key is pressed for previous, F9 key for next
     if( code == 120 ) {
        this.selectVideo(true);
