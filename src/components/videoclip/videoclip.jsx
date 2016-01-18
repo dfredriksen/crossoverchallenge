@@ -15,7 +15,7 @@ class VideoClip extends React.Component {
     props.removeEventPrefix = props.removeEventPrefix || props.name;
     props.allowEdit = props.allowEdit || false;
     props.allowRemove = props.allowRemove || false;
-    props.index = props.index || -1;
+    props.index = typeof props.index !== 'undefined' ? props.index : -1;
     props.initialEditMode = props.initialEditMode || false;
     props.maxDuration = props.maxDuration || 0;
     props.selected = props.selected || false;
