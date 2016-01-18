@@ -39,18 +39,32 @@ class VideoClipList extends React.Component {
     this.setState({clips:clips});
   }
 
+  videoSelected(event) {
+    var index, clips, loopindex;
+    console.log('I caught the play event');
+    if(index > 0 && index < clips.length) {
+      for(loopindex < 0; loopindex < clips.length; loopindex++) {
+        clips[loopindex].selected = false;
+      }
+
+      clips[index].selected = true;
+    }
+
+    this.setState({clips:clips});
+  }
+
   componentDidMount() {
     document.addEventListener(this.props.createEventPrefix + '_videoclip_create' , this.createClip.bind(this));
     document.addEventListener(this.props.removeEventPrefix + '_videoclip_remove' , this.removeClip.bind(this));
     document.addEventListener(this.props.videoEndEventPrefix + '_video_end' , this.videoEnded.bind(this));
-
+    document.addEventListener(this.props.videoPlayEventPrefix + '_videoclip_play' , this.videoSelected.bind(this));
   }
 
   videoEnded(event) {
     var newEvent = {}, clip = {}, index, self, timer;
     self = this;
     index = event.videoData.index;
-    if(index < this.state.clips.length - 1) {
+    if(index > -1 && index < this.state.clips.length - 1) {
       event.videoData.videoObject.showLoader();
       timer = window.setInterval(function(){
           clearInterval(timer);
@@ -104,7 +118,6 @@ class VideoClipList extends React.Component {
 
    renderClips() {
     var index = 0, clips = [], clipData;
-    console.log(this.state.clips);
     for(index = 0; index < this.state.clips.length; index++) {
       clipData = {};
       clipData.name = this.props.name + '_clip' + index;
@@ -113,7 +126,8 @@ class VideoClipList extends React.Component {
       clipData.clipEnd = this.state.clips[index].clipEnd;
       clipData.clipName = this.state.clips[index].clipName;
       clipData.clipSrc = this.state.clips[index].clipSrc;
-      clipData.clipStart = this.state.clips[index].clipStart;      
+      clipData.clipStart = this.state.clips[index].clipStart;     
+      clipData.selected = this.state.clips[index].selected || false; 
       if(this.state.filter != '' && clipData.clipName.indexOf(this.state.filter) < 0) {
         clipData.class = this.state.clips[index].class + ' hide';
       }
@@ -125,7 +139,6 @@ class VideoClipList extends React.Component {
          </li>
        );    
     }
-    console.log(clips);
     return clips;
    }
 

@@ -25,6 +25,7 @@ And your dist folder will be built with the appropriate dependencies.
 Some technical debt that was assumed during this project. This debt was taken on because of limited project time and tracked here to be prioritized or forgotten as necessary.
 
 ```
+fix a bug that prevent one from pausing using the standard controls if there are multiple clips in the list. Will need to use custom controls anyway
 fieldChange class is duplicated in multiple components. These components could potentially extend from a master component that implements this class.
 Event data is assumed to be valid when catching events. Error checking mechanisms can be added here
 Better form validation - Start time should not exceed end time. Max duration on start time. Error message
@@ -44,6 +45,7 @@ Some product ideas worth exploring for the future:
 
 ```
 Allow user to upload a 'poster' (aka teaser) image for the video in case it is shared elsewhere
+Save button should highlight whenever there is unsaved changes
 ```
 
 ### v1.0.0

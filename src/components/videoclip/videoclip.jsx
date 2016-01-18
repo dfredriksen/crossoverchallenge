@@ -18,6 +18,7 @@ class VideoClip extends React.Component {
     props.index = props.index || -1;
     props.initialEditMode = props.initialEditMode || false;
     props.maxDuration = props.maxDuration || 0;
+    props.selected = props.selected || false;
     super(props);
     this.state = {
       editMode:props.initialEditMode, 
@@ -124,7 +125,8 @@ class VideoClip extends React.Component {
 
 
   render() {
-    this.props.class = this.props.class ? this.props.class + ' video-clip' : 'video-clip';  
+    this.props.class = this.props.class ? this.props.class + ' video-clip' : 'video-clip';
+    this.props.class = this.props.selected ? this.props.class + ' selected' : this.props.class;  
     return (
       <div className={this.props.class}>
         <div className="thumb">
