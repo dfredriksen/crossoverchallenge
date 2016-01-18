@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../dist/css/components/videoclip/less/videoclip.css">
     <link rel="stylesheet" type="text/css" href="../dist/css/components/videocliplist/less/videocliplist.css">
     <link rel="stylesheet" type="text/css" href="../dist/css/components/clipcontrol/less/clipcontrol.css">
+    <link rel="stylesheet" type="text/css" href="../dist/css/components/videotimeline/less/videotimeline.css">
 
     <!-- external libraries -->
     <script src="../dist/libs/react/react.min.js"></script>
@@ -31,6 +32,7 @@
         </div>
         <div class="col-sm-6">
           <div class="react-video-clip" data-props='{"name":"videoclip_1","id":"videoclip_1","clipName":"Full Video","clipSrc":"assets/sintel_trailer-480.mp4", "playEventPrefix":"mainVideo","allowRemove":false,"allowEdit":false}'></div>
+          <div class="react-video-timeline margin-5-top" data-props='{"name":"videotimeline","id":"videotimeline","updateEventPrefix":"mainVideo","addMarkerEventPrefix":"clipcontrol"}'></div>
           <hr />
           <div class="react-video-clip-list" data-props='{"createEventPrefix":"clipcontrol","playEventPrefix":"mainVideo","editEventPrefix":"listEdit","removeEventPrefix":"listRemove", "allowEdit":true,"allowRemove":true}'></div>
         </div>
@@ -42,6 +44,7 @@
     <script src="../dist/components/videoplayer/videoplayer.js"></script>
     <script src="../dist/components/videoclip/videoclip.js"></script>
     <script src="../dist/components/videocliplist/videocliplist.js"></script>
+    <script src="../dist/components/videotimeline/videotimeline.js"></script>
     <script src="../dist/js/app.js"></script>
 
   </body>

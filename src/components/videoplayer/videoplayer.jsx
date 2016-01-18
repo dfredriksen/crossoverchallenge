@@ -8,6 +8,7 @@ class VideoPlayer extends React.Component {
     props.controls = typeof props.controls === 'undefined' ? true : props.controls;
     props.playEventPrefix = props.playEventPrefix || props.name;
     props.endEventPrefix = props.endEventPrefix || props.playEventPrefix;
+    props.timeEventPrefix = props.timeEventPrefix || props.playEventPrefix;
     props.listenToEvents = props.listenToEvents || true;
     props.videoSrc = props.videoSrc || '';
     props.videoStart = props.videoStart || 0;
@@ -27,8 +28,7 @@ class VideoPlayer extends React.Component {
   hideLoader() {
     this.setState({showLoader: false});
   }
-
-  
+ 
   playClip(event) {
     var videoSrc, end, start, timer, timercounter, index, self;
     self = this;
@@ -63,8 +63,7 @@ class VideoPlayer extends React.Component {
     } 
   }
 
-  prepareVideoSource(source,start,end)
-  {
+  prepareVideoSource(source,start,end){
     var videoSrc = source;
     videoSrc = videoSrc + '#t=' || '';
     videoSrc = start ? videoSrc + start : videoSrc + '0';
@@ -72,10 +71,17 @@ class VideoPlayer extends React.Component {
     return videoSrc;
   }
 
+  videoProgressed(event) {
+      var currentTime = this.refs.video.currentTime, newEvent;
+      newEvent = new Event(this.props.endEventPrefix + '_video_timeupdate');
+      newEvent.videoData = {videoId:this.props.id,index:this.state.index, videoObject: this, currentTime:currentTime}; 
+      document.dispatchEvent(newEvent); 
+  }
+
   componentDidMount() {
     document.addEventListener(this.props.playEventPrefix + '_videoclip_play' , this.playClip.bind(this));
     this.refs.video.addEventListener('pause', this.videoEnded.bind(this));
-    //this.refs.video.addEventListener('timeupdate', this.videoEnded.bind(this));
+    this.refs.video.addEventListener('timeupdate', this.videoProgressed.bind(this));
   }
 
   renderLoaderAnimation() {

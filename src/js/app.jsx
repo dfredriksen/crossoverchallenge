@@ -6,6 +6,7 @@ $(document).ready(function() {
     $videoclip,
     $videocliplist,
     $clipcontrol,
+    $videotimeline,
     $video,
     props,
     duration,
@@ -16,6 +17,7 @@ $(document).ready(function() {
   $videoclip = $('.react-video-clip');
   $videocliplist = $('.react-video-clip-list');
   $clipcontrol = $('.react-clip-control');
+  $videotimeline = $('.react-video-timeline');
 
   if($videoplayer.length > 0 && VideoPlayer) {
     props = $videoplayer.data('props');    
@@ -60,6 +62,19 @@ $(document).ready(function() {
             <VideoClipList {...props} />,
             $videocliplist[0]
           );
+        }
+
+        if($videotimeline.length > 0 && VideoTimeline) {
+          var savedClips = window.localStorage.getItem('clips') || [];
+          var containerWidth = $videotimeline.width();          
+          props = $videotimeline.data('props');   
+          props.clips = JSON.parse(savedClips);
+          props.containerWidth = containerWidth;
+          props.duration = duration;
+          ReactDOM.render(
+            <VideoTimeline {...props} />,
+            $videotimeline[0]
+          );         
         }
 
       }

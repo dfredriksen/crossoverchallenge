@@ -37,6 +37,7 @@ Gulp task to handle optimization of image assets
 Fix jumpiness in certain state changes by using fixed width divs in example
 Message functionality is pretty standard, could probably go into a master class to be inherited
 Used div tags to structure the break between some elements, such as label and input for filter to save time. Would be better to use css display property for flexibility 
+SVG animations are deprecated. Utilize a new SVG.
 ```
 
 ### Product ideas

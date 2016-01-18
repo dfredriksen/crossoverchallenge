@@ -23,7 +23,7 @@ class VideoClipList extends React.Component {
   }
 
   createClip(event) {
-    var newClip = {}, clips = this.state.clips;
+    var newClip = {}, clips = this.state.clips, color;
     newClip.clipStart = event.clipData.start;
     newClip.clipEnd = event.clipData.end;
     newClip.clipSrc = event.clipData.src;
