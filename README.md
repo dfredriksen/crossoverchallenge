@@ -69,3 +69,8 @@ Bonus feature ability to filter by tag names
 
 Bonus feature ability to move to previous and next clip with the F7 and F9 keys respectively
 Fixed a bug with the clip indexes and added highlight to selected clip
+
+### v1.0.5
+Bonus feature ability to click on marker tags on timeline to jump to clip position.
+added ability to pause in between clips before it transitions to a new clip.
+
