@@ -1,5 +1,8 @@
 # Code Challenge for Crossover Intelligence
 
+## Overview
+This project is my answer for the code challenge posed by Crossover intelligence. It fulfills all of the specs for the mandatory features and the bonus features, and is very modular. The UI/UX is simple and straightforward, and also is mildly responsive. To see the examples in action, simply view the files in the examples directory. There is a sample that allows editing and a readonly page that demonstrates a different arrangement of the components of the page. 
+
 ### Dependencies
 To use the latest version of this repository, check out the latest version branch and include the files from the dist folder with your package manager of choice. To compile from source, npm is a required dependency. You can find instructions on how to install npm at [http://blog.npmjs.org/post/85484771375/how-to-install-npm].
 
@@ -38,6 +41,7 @@ Fix jumpiness in certain state changes by using fixed width divs in example
 Message functionality is pretty standard, could probably go into a master class to be inherited
 Used div tags to structure the break between some elements, such as label and input for filter to save time. Would be better to use css display property for flexibility 
 SVG animations are deprecated. Utilize a new SVG.
+Bootstrap animation for the timeline is a little jumpy when going forward, it sometimes goes back.
 ```
 
 ### Product ideas
@@ -74,3 +78,5 @@ Fixed a bug with the clip indexes and added highlight to selected clip
 Bonus feature ability to click on marker tags on timeline to jump to clip position.
 added ability to pause in between clips before it transitions to a new clip.
 
+### v1.0.6
+Bonus feature included an example of a readonly arrangement of the components
