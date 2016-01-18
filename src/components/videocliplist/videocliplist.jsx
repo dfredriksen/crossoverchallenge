@@ -80,10 +80,11 @@ class VideoClipList extends React.Component {
 
   keyEvent(event) {
     var code = event.keyCode;
-    //n or N key is pressed for next
-    if( code == 78 ) {
+    console.log(code);
+    //F7 key is pressed for previous, F9 key for next
+    if( code == 120 ) {
        this.selectVideo(true);
-    } else if(code == 80) {
+    } else if(code == 118) {
        this.selectVideo(false);     
     }
   }
